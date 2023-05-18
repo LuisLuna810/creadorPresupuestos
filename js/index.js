@@ -1,5 +1,4 @@
-
-
+/*Función que se encargar de abrir las diferentes categorias que se encuentren en la cabecera
 function openTab(evt, tabName) {
   var i, tabcontent, tablinks;
   tabcontent = document.getElementsByClassName("tabcontent");
@@ -12,62 +11,30 @@ function openTab(evt, tabName) {
   }
   document.getElementById(tabName).style.display = "block";
   evt.currentTarget.className += " active";
-}
+} */
 
+/*Funcion que se encarga de realizar la cuenta de tables dentro del div */
 function count(){
-  const div = document.getElementById('tab1')
-  table = div.querySelectorAll('table')
-  tableLength = table.length
-  return tableLength
+  const table = document.getElementById('table1')
+  tr = table.querySelectorAll('tr')
+  trLength = tr.length
+  return trLength
 }
 
 
 /*Agregar filas */
-
 function addRow(){
-
-
-  const div = document.getElementById('tab1')
-  tableLength = count()
+const table = document.getElementById('table1')
+trLength = count()
   
-  // Crea una fila y agrega tr con nombre de los campos
-const row1 = document.createElement('tr')
+// Crea una fila y agrega tr con nombre de los campos
 const row2 = document.createElement('tr')
 const tbody = document.createElement('tbody')
-const table = document.createElement('table')
 
 
-const col1 = document.createElement('td')
-col1.textContent = 'Virtual machine'
-const col2 = document.createElement('td')
-col2.textContent = 'Sistema operativo' 
-const col3 = document.createElement('td')
-col3.textContent = 'Licenza'
-const col4 = document.createElement('td')
-col4.textContent = 'Numero di CPU' 
-const col5 = document.createElement('td')
-col5.textContent = 'Memoria RAM' 
-const col6 = document.createElement('td')
-col6.textContent = 'Disco Rigido'
-const col7 = document.createElement('td')
-col7.textContent = 'Descrizione del software' 
-const col8 = document.createElement('td')
-col8.textContent = 'Sistema di Backup'
-const col9 = document.createElement('td')
-col9.textContent = 'Consumo di rete (Ingresso)' 
-const col10 = document.createElement('td')
-col10.textContent = 'Consumo di rete Uscita' 
-
-/*Este for se encarga de agregar todo los td a la fila*/
-for (let i = 1; i < 11; i++) {
-  let col = eval('col' + i)
-  row1.appendChild(col)
-}
-
-/*Agregar opciones para que el usuario elija*/
+//Agregar opciones para que el usuario elija
 const dato1 = document.createElement('td')
-dato1.textContent = `VM ${tableLength+1}`
-dato1.setAttribute('class', 'contador')
+dato1.textContent = `VM ${trLength}`
 row2.appendChild(dato1)
 
 const dato2 = document.createElement('td')
@@ -204,20 +171,26 @@ select10.appendChild(option103)
 dato10.appendChild(select10)
 row2.appendChild(dato10)
 
+const dato11 = document.createElement('td')
+const btn = document.createElement('button');
+btn.textContent = 'X'
+btn.className = `btn btn-outline-danger btn-${trLength}`
+btn.setAttribute('onclick', `del(${trLength})`)
+dato11.appendChild(btn)
+row2.appendChild(dato11)
+
 
 
 /*Aqui se agrega la fila al tbody */
-tbody.appendChild(row1)
 tbody.appendChild(row2)
+tbody.className = `vm${trLength}`
 table.appendChild(tbody)
-table.className = `table${tableLength+1}`
-div.appendChild(table)
-
-
-
-
-
-
 }
 
 
+// Funcion que permite eliminar una fila 
+function del(trNum){
+  const table = document.getElementById('table1');
+  const tbody = document.querySelector(`.vm${trNum}`);
+  table.removeChild(tbody);
+}

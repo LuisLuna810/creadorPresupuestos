@@ -1,6 +1,4 @@
-function conexion (){
-const { error } = require('console')
-const mysql = require('mysql')
+const mysql = require('mysql');
 
 const conection = mysql.createConnection(
     {
@@ -9,25 +7,23 @@ const conection = mysql.createConnection(
         password : '',
         database : 'formulario'
     }
-)
+);
 
 conection.connect( (err) =>{
-    if(err) throw err
-    console.log('La conexion funciona')
+    if (err) throw err;
+    console.log('La conexion funciona');
 })
-/*
-Mostrar productos que pertenecen a cierta categoria
+
+// Mostrar productos que pertenecen a cierta categoria
 conection.query('SELECT * from products' , (err, rows) =>{
-    if(err) throw err
-    console.log('Response')
-    console.log(rows[0].precio)
+    if(err) throw err;
+    console.log('Response');
+    console.log(rows[0].precio);
 })
 
 
-Finaliza la conexion
+// Finaliza la conexion
 conection.end( (end)=>{
-    if(end) throw end
-    console.log('La conexion se cerro')
+    if(end) throw end;
+    console.log('La conexion se cerro');
 })
-*/
-}

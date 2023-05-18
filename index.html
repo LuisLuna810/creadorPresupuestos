@@ -6,350 +6,102 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="./style/index.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 <body>
-  <!-- Creación de las pestañas -->
-<div class="tab">
-  <button class="tablinks" onclick="openTab(event, 'tab1')">Virtual Machine</button>
-  <button class="tablinks" onclick="openTab(event, 'tab2')">Base di dati</button>
-  <button class="tablinks" onclick="openTab(event, 'tab3')">Firewall Network</button>
-  <button class="tablinks" onclick="openTab(event, 'tab4')">Office 365 e Backup</button>
-  <button class="tablinks" onclick="openTab(event, 'tab5')">Servizi personalizzati</button>
-</div>
 
+<div class="header">
+  <h3>Presupuesto</h3>
+</div>
 <!-- Contenido de las pestañas -->
 <div id="tab1" class="tabcontent">
-  <h3>Virtual Machine</h3>
-
-  <button class="add" onclick="addRow('table1')">Agregar</button>
-</div>
-
-<div id="tab2" class="tabcontent">
-  <h3>Base di dati</h3>
-  <table>
+  <table id="table1">
     <tr>
-      <th>Base di dati</th>
-      <th>Tipo di base di dati</th>
-      <th>Licenza base di dati</th>
-      <th>Sistema Operativo</th>
+      <th>Virtual machine</th>
+      <th>Sistema operativo</th>
       <th>Licenza</th>
-      <th>Numero di CPU</th>
+      <th>Numero de CPU</th>
       <th>Memoria RAM</th>
-      <th>Disco Rigido</th>
-      <th>Descrizione del software</th>
-      <th>Sistema di Backup</th>
-      <th>Consumo di rete (Ingresso)</th>
-      <th>Consumo di rete (Uscita)</th>
+      <th>Disco Rigid</th>
+      <th>Descripción del software</th>
+      <th>Backup</th>
+      <th>Consumo de red (Subida)</th>
+      <th>Consumo de red (Bajada)</th>
+      <th>Eliminar</th>
     </tr>
+    <tbody class="vm1">
     <tr>
       <td>
-        <select name="bdd" id="bdd">
-          <option value="sql-Server">SQL Server 2019</option>
-          <option value="MongoDb">MongoDB 4.4</option>
-          <option value="Oracle">Oracle 19c</option>
+        VM 1
+      </td>
+      <td>
+        <select name="Sistema Operativo" id="os">
+          <option value="Windows-server2019">Windows-server2019</option>
+          <option value="CentOS-7">CentOS-7</option>
+          <option value="Ubuntu-20.04">Ubuntu-20.04</option>
         </select>
       </td>
       <td>
-        <select name="tipe" id="tipe">
-          <option value="Relazionale">Relazionale</option>
-          <option value="non-Relazionale">Non relazionale</option>
-        </select>
-      </td>
-    <td>
-      <select name="LicenzaBdd" id="licenzaBdd">
-        <option value="Inclusa">Inclusa</option>
-        <option value="commerciale">Licenza commerciale</option>
-      </select>
-    </td>
-    <td>
-      <select name="Sistema Operativo" id="os">
-        <option value="Windows-server2019">Windows-server2019</option>
-        <option value="CentOS-7">CentOS-7</option>
-        <option value="Ubuntu-20.04">Ubuntu-20.04</option>
-      </select>
-    </td>
-    <td>
-      <select name="Licenza" id="licenza">
+      <select id="licencia">
         <option value="Inclusa">Inclusa</option>
         <option value="non-Inclusa">Non inclusa</option>
       </select>
     </td>
     <td>
-      <select name="cpus" id="cpus">
+      <select id="cpus">
         <option value="2">2</option>
         <option value="4">4</option>
         <option value="8">8</option>
       </select>
     </td>
     <td>
-      <select name="ram" id="ram">
+      <select id="ram">
         <option value="8">8gb</option>
         <option value="16">16gb</option>
         <option value="32">32gb</option>
       </select>
     </td>
     <td>
-      <select name="storage" id="storage">
+      <select  id="almacenamiento">
         <option value="250">250gb</option>
         <option value="500">500gb</option>
         <option value="1024">1tb</option>
       </select>
     </td>
     <td>
-      <select name="description" id="description">
-        <option value="1">Descrizione 1</option>
-        <option value="2">Descrizione 2</option>
-        <option value="3">Descrizione 3</option>
-      </select>
-    </td>
-    <td>
-      <select name="backup" id="backup">
-        <option value="Giornaliero">Giornaliero</option>
-        <option value="Settimanale">Settimanale</option>
-        <option value="Mensile">Mensile</option>
-      </select>
-    </td>
-    <td>
-      <select name="input" id="input">
-        <option value="5">5Mbps</option>
-        <option value="10">10Mbps</option>
-        <option value="20">20Mbps</option>
-      </select>
-    </td>
-    <td>
-      <select name="output" id="output">
-        <option value="1">1Mbps</option>
-        <option value="2">2Mbps</option>
-        <option value="5">5Mbps</option>
-      </select>
-    </td>
-    </tr>
-  </table>
-</div>
-
-<div id="tab3" class="tabcontent">
-  <h3>Firewall Network</h3>
-  <table>
-    <tr>
-      <th>Firewall / Network</th>
-      <th>Sistema Operativo</th>
-      <th>Licenza</th>
-      <th>Numero di CPU</th>
-      <th>Memoria RAM</th>
-      <th>Disco Rigido</th>
-      <th>Descrizione del software</th>
-      <th>Sistema di Backup</th>
-      <th>Consumo di rete (Ingresso)</th>
-      <th>Consumo di rete (Uscita)</th>
-    </tr>
-    <tr>
-      <td>
-        <select name="firewall" id="firewall">
-          <option value="FortiGate">FortiGate VM</option>
-          <option value="pfSense">pfSense</option>
-          <option value="Cisco">Cisco ASA</option>
-        </select>
-      </td>
-      <td>
-      <select name="Sistema Operativo" id="os">
-        <option value="FortiOS">FortiOS</option>
-        <option value="FreeBSD">FreeBSD</option>
-        <option value="Cisco">Cisco ASA OS</option>
-      </select>
-    </td>
-    <td>
-      <select name="Licenza" id="licenza">
-        <option value="Inclusa">Inclusa</option>
-        <option value="commerciale">Licenza commerciale</option>
-      </select>
-    </td>
-    <td>
-      <select name="cpus" id="cpus">
-        <option value="2">2</option>
-        <option value="4">4</option>
-        <option value="8">8</option>
-      </select>
-    </td>
-    <td>
-      <select name="ram" id="ram">
-        <option value="8">8gb</option>
-        <option value="16">16gb</option>
-        <option value="32">32gb</option>
-      </select>
-    </td>
-    <td>
-      <select name="storage" id="storage">
-        <option value="250">250gb</option>
-        <option value="500">500gb</option>
-        <option value="1024">1tb</option>
-      </select>
-    </td>
-    <td>
-      <select name="description" id="description">
-        <option value="1">Descrizione 1</option>
-        <option value="2">Descrizione 2</option>
-        <option value="3">Descrizione 3</option>
-      </select>
-    </td>
-    <td>
-      <select name="backup" id="backup">
-        <option value="Giornaliero">Giornaliero</option>
-        <option value="Settimanale">Settimanale</option>
-        <option value="Mensile">Mensile</option>
-      </select>
-    </td>
-    <td>
-      <select name="input" id="input">
-        <option value="5">5Mbps</option>
-        <option value="10">10Mbps</option>
-        <option value="20">20Mbps</option>
-      </select>
-    </td>
-    <td>
-      <select name="output" id="output">
-        <option value="2">2Mbps</option>
-        <option value="5">5Mbps</option>
-        <option value="10">10Mbps</option>
-      </select>
-    </td>
-    </tr>
-  </table>
-</div>
-
-<div id="tab4" class="tabcontent">
-  <h3>Office 365 e Backup</h3>
-  <table>
-    <tr>
-      <th>Servizio di Office 365</th>
-      <th>Backup</th>
-      <th>Frequenza di backup</th>
-      <th>Descrizione del software</th>
-    </tr>
-    <tr>
-      <td>
-        <select name="firewall" id="firewall">
-          <option value="Exchange">Exchange Online</option>
-          <option value="OneDrive">OneDrive for Business</option>
-          <option value="SharePoint">SharePoint Online</option>
-          <option value="Teams">Microsoft Teams</option>
-        </select>
-      </td>
-    <td>
-      <select name="bakcup" id="licenza">
-        <option value="1">Si</option>
-        <option value="0">No</option>
-      </select>
-    </td>
-    <td>
-      <select name="fbackup" id="fbackup">
-        <option value="Giornaliero">Giornaliero</option>
-        <option value="Settimanale">Settimanale</option>
-        <option value="Mensile">Mensile</option>
-      </select>
-    </td>
-    <td>
-      <select name="description" id="description">
-        <option value="1">Descrizione 1</option>
-        <option value="2">Descrizione 2</option>
-        <option value="3">Descrizione 3</option>
-      </select>
-    </td>
-  </table>
-</div>
-
-<div id="tab5" class="tabcontent">
-  <h3> Servizi personalizzati</h3>
-  <table>
-    <tr>
-      <th>Servizio</th>
-      <th>Descrizione del software</th>
-      <th>Versione del software</th>
-      <th>Software applicativo</th>
-      <th>Sistema Operativo</th>
-      <th>Licenza</th>
-      <th>Numero di CPU</th>
-      <th>Memoria RAM</th>
-      <th>Disco Rigido</th>
-      <th>Consumo di rete (Ingresso)</th>
-      <th>Consumo di rete (Uscita)</th>
-      <th>Sistema di Backup</th>
-    </tr>
-    <tr>
-      <td>Servizio personalizzato 1</td>
-      <td>
       <input type="text">
     </td>
-      <td>
-        <select name="bdd" id="bdd">
-          <option value="1">1.0</option>
-          <option value="2">2.5</option>
-          <option value="3">3.0</option>
-        </select>
-      </td>
-      <td>
-      <select name="software" id="software">
-        <option value="1">Apache 2.4.46, PHP 7.4.3</option>
-        <option value="2">MySQL 8.0.25, Node.js 14.16.1</option>
-        <option value="3">MongoDB 4.4.6, Node.js 12.22.1</option>
+    <td>
+      <select id="backup">
+        <option value="Giornaliero">Giornaliero</option>
+        <option value="Settimanale">Settimanale</option>
+        <option value="Mensile">Mensile</option>
       </select>
     </td>
     <td>
-      <select name="Sistema Operativo" id="os">
-        <option value="Windows-server2019">Windows-server2019</option>
-        <option value="CentOS-7">CentOS-7</option>
-        <option value="Ubuntu-20.04">Ubuntu-20.04</option>
-      </select>
-    </td>
-    <td>
-      <select name="Licenza" id="licenza">
-        <option value="Inclusa">Inclusa</option>
-        <option value="non-Inclusa">Non inclusa</option>
-      </select>
-    </td>
-    <td>
-      <select name="cpus" id="cpus">
-        <option value="2">2</option>
-        <option value="4">4</option>
-        <option value="8">8</option>
-      </select>
-    </td>
-    <td>
-      <select name="ram" id="ram">
-        <option value="8">8gb</option>
-        <option value="16">16gb</option>
-        <option value="32">32gb</option>
-      </select>
-    </td>
-    <td>
-      <select name="storage" id="storage">
-        <option value="250">250gb</option>
-        <option value="500">500gb</option>
-        <option value="1024">1tb</option>
-      </select>
-    </td>
-    <td>
-      <select name="input" id="input">
+      <select id="subida">
         <option value="5">5Mbps</option>
         <option value="10">10Mbps</option>
         <option value="20">20Mbps</option>
       </select>
     </td>
     <td>
-      <select name="output" id="output">
+      <select id="bajada">
         <option value="1">1Mbps</option>
         <option value="2">2Mbps</option>
         <option value="5">5Mbps</option>
       </select>
     </td>
     <td>
-      <select name="backup" id="backup">
-        <option value="Giornaliero">Giornaliero</option>
-        <option value="Settimanale">Settimanale</option>
-        <option value="Mensile">Mensile</option>
-      </select>
+      <button type="button" class="btn btn-outline-danger btn-1" onclick="del(1)">X</button>
     </td>
     </tr>
+  </tbody>
   </table>
+</div>
+<div>
+  <button class="add" onclick="addRow('table1')">Agregar VM</button>
+</div>
 </div>
 <script src="./js/index.js"></script>
 </body>
