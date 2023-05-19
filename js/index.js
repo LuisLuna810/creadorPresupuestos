@@ -1,18 +1,3 @@
-/*Función que se encargar de abrir las diferentes categorias que se encuentren en la cabecera
-function openTab(evt, tabName) {
-  var i, tabcontent, tablinks;
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
-  document.getElementById(tabName).style.display = "block";
-  evt.currentTarget.className += " active";
-} */
-
 /*Funcion que se encarga de realizar la cuenta de tables dentro del div */
 function count(){
   const table = document.getElementById('table1')
@@ -34,6 +19,7 @@ const tbody = document.createElement('tbody')
 
 //Agregar opciones para que el usuario elija
 const dato1 = document.createElement('td')
+dato1.className = `td${trLength}`
 dato1.textContent = `VM ${trLength}`
 row2.appendChild(dato1)
 
@@ -182,15 +168,30 @@ row2.appendChild(dato11)
 
 
 /*Aqui se agrega la fila al tbody */
-tbody.appendChild(row2)
-tbody.className = `vm${trLength}`
-table.appendChild(tbody)
+tbody.appendChild(row2);
+tbody.className = `vm${trLength}`;
+table.appendChild(tbody);
 }
+  
 
 
+  
 // Funcion que permite eliminar una fila 
 function del(trNum){
   const table = document.getElementById('table1');
   const tbody = document.querySelector(`.vm${trNum}`);
   table.removeChild(tbody);
+  order(table)
+}
+
+// Funcion que reordena la numeración de las VM
+function order(table){
+  var tbody = table.querySelectorAll('tbody'); //contenido del table muestra los tbody  
+  let c = 1
+  for (let i = 1; i < tbody.length; i++) {
+    var getElementsTbody = document.querySelectorAll(`tbody`)[i];
+    var getElementTr = getElementsTbody.querySelectorAll(`tr`)[0];
+    var getElementTd = getElementTr.querySelectorAll(`td`)[0];
+    getElementTd.textContent = `VM ${c++}`;
+  }
 }
