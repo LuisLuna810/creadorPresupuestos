@@ -1,7 +1,15 @@
+body{
+  background-color: #010011!important;
+}
+ 
  /* Header */
  .header{
   padding: 2px 4px;
   text-align: center;
+  color: rgb(223, 223, 223);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 48px;
  }
  
  
@@ -27,11 +35,4 @@
 /* Estilo de la pestaña activa */
 .tab a.active {
   background-color: #ccc;
-}
-
-/* Contenido de las pestañas */
-.tabcontent {
-  padding: 6px 12px;
-  border: 1px solid #ccc;
-  border-top: none;
 }

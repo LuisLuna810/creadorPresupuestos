@@ -19,7 +19,7 @@ const tbody = document.createElement('tbody')
 
 //Agregar opciones para que el usuario elija
 const dato1 = document.createElement('td')
-dato1.className = `td${trLength}`
+dato1.className = `td${trLength} m-3 text-center`
 dato1.textContent = `VM ${trLength}`
 row2.appendChild(dato1)
 
@@ -37,6 +37,7 @@ option23.value = 3
 select2.appendChild(option21)
 select2.appendChild(option22)
 select2.appendChild(option23)
+select2.setAttribute('class', 'form-select')
 dato2.appendChild(select2)
 row2.appendChild(dato2)
 
@@ -50,6 +51,7 @@ option32.textContent = 'Non licenza';
 option32.value = 2
 select3.appendChild(option31)
 select3.appendChild(option32)
+select3.setAttribute('class', 'form-select')
 dato3.appendChild(select3)
 row2.appendChild(dato3)
 
@@ -67,6 +69,7 @@ option43.value = 3
 select4.appendChild(option41)
 select4.appendChild(option42)
 select4.appendChild(option43)
+select4.setAttribute('class', 'form-select')
 dato4.appendChild(select4)
 row2.appendChild(dato4)
 
@@ -84,6 +87,7 @@ option53.value = 3
 select5.appendChild(option51)
 select5.appendChild(option52)
 select5.appendChild(option53)
+select5.setAttribute('class', 'form-select')
 dato5.appendChild(select5)
 row2.appendChild(dato5)
 
@@ -101,25 +105,22 @@ option63.value = 3
 select6.appendChild(option61)
 select6.appendChild(option62)
 select6.appendChild(option63)
+select6.setAttribute('class', 'form-select')
 dato6.appendChild(select6)
 row2.appendChild(dato6)
 
-const dato7 = document.createElement('td')
-const select7 = document.createElement('input');
-dato7.setAttribute('type', 'text')
-dato7.appendChild(select7)
-row2.appendChild(dato7)
 
 const dato8 = document.createElement('td')
 const select8 = document.createElement('select');
 const option81 = document.createElement('option');
-option81.textContent = 'Giornaliero';
+option81.textContent = 'Diario';
 option81.value = 1
 const option82 = document.createElement('option');
-option82.textContent = 'Settimanale';
+option82.textContent = 'Semanal';
 option82.value = 2
 select8.appendChild(option81)
 select8.appendChild(option82)
+select8.setAttribute('class', 'form-select')
 dato8.appendChild(select8)
 row2.appendChild(dato8)
 
@@ -137,6 +138,7 @@ option93.value = 3
 select9.appendChild(option91)
 select9.appendChild(option92)
 select9.appendChild(option93)
+select9.setAttribute('class', 'form-select')
 dato9.appendChild(select9)
 row2.appendChild(dato9)
 
@@ -154,16 +156,21 @@ option103.value = 3
 select10.appendChild(option101)
 select10.appendChild(option102)
 select10.appendChild(option103)
+select10.setAttribute('class', 'form-select')
 dato10.appendChild(select10)
 row2.appendChild(dato10)
 
-const dato11 = document.createElement('td')
+const dato11 = document.createElement('td');
 const btn = document.createElement('button');
-btn.textContent = 'X'
+const img = document.createElement('img');
+img.setAttribute('style', 'width:1.4rem; height: 1.4rem;');
+img.setAttribute('src', './resources/icons8-delete-384.png');
+img.setAttribute('alt', 'deleteIcon');
 btn.className = `btn btn-outline-danger btn-${trLength}`
 btn.setAttribute('onclick', `del(${trLength})`)
-dato11.appendChild(btn)
-row2.appendChild(dato11)
+btn.appendChild(img);
+dato11.appendChild(btn);
+row2.appendChild(dato11);
 
 
 
@@ -172,9 +179,6 @@ tbody.appendChild(row2);
 tbody.className = `vm${trLength}`;
 table.appendChild(tbody);
 }
-  
-
-
   
 // Funcion que permite eliminar una fila 
 function del(trNum){
