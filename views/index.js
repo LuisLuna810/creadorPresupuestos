@@ -8,7 +8,7 @@ function del(trNum) {
   }
 }
 
-/*Funcion que se encarga de realizar la cuenta de tables dentro del div */
+//Funcion que se encarga de realizar la cuenta de tables dentro del div 
 function count() {
   const table = document.getElementById('table1')
   tr = table.querySelectorAll('tr')
@@ -27,32 +27,57 @@ function order(table) {
     getElementTd.textContent = `VM ${c++}`;
   }
 }
+
 //funcion que genera el select con los datos
-function generarSelect(array){
+function generarSelect(array) {
   var select1 = document.createElement('select');
   select1.setAttribute('class', 'form-select');
-  array.forEach(element => {
+  nombres = obtenerNombre(array);
+  nombres.forEach(element => {
     let option = document.createElement('option');
-    option.textContent = JSON.stringify(obtenerNombre(element));
-    option.value = JSON.stringify(element);
+    option.textContent = element;
+    option.value = element;
     select1.appendChild(option);
+
   })
   return select1;
 }
+
 //funcion que filtra el array por categoria
 function filtrarPorCategoria(array, categoria) {
   return array.filter(elemento => elemento.category === categoria);
 }
-//funcion que obtiene un array con los nombres
 
-function obtenerNombre(array){
+//funcion que obtiene un array con los nombres
+function obtenerNombre(array) {
   let nombres = array.map(elemento => elemento.product);
   return nombres;
 }
 
+//funcion que crea una columna de la fila
+function crearColumna(productos, nombreCategoria) {
+  const categoria = filtrarPorCategoria(productos, nombreCategoria);
+  const dato2 = document.createElement('td')
+  const selectSO = generarSelect(categoria);
+  dato2.appendChild(selectSO)
+  row2.appendChild(dato2)
+  return row2;
+}
+
+//Funcion que asigna clases a las filas
+function asignarClaseFila() {
+  var newTr = count();
+  //Este while se asegura de no asignarle la misma clase a 2 filas distintas
+  while (document.querySelector(`.vm${newTr}`) != null) {
+    newTr++;
+  }
+  let clase = `vm${newTr}`;
+  return clase;
+}
+
 function addRow(productos) {
   console.log(productos);
-  
+
   const table = document.getElementById('table1')
   trLength = count()
 
@@ -67,18 +92,27 @@ function addRow(productos) {
   dato1.textContent = `VM ${trLength}`
   row2.appendChild(dato1)
 
+  const columnas = crearColumnas(productos);
 
+  function crearColumnas(productos) {
+    let columnas = document.createElement('tr');
 
-  //fila sistema operativo
-  function crearSO(productos) {
-      const categoria = filtrarPorCategoria(productos, 'Sistema operativo');
-      const dato2 = document.createElement('td')
-      const selectSO = generarSelect(categoria);
-      dato2.appendChild(selectSO)
-      row2.appendChild(dato2)
+    tbody.className = asignarClaseFila();
+    columnas.appendChild(crearColumna(productos, 'Sistema operativo'));
+    columnas.appendChild(crearColumna(productos, 'licencia'));
+    columnas.appendChild(crearColumna(productos, 'numero de cpu'));
+    columnas.appendChild(crearColumna(productos, 'memoria ram'));
+    columnas.appendChild(crearColumna(productos, 'disco rigido'));
+    columnas.appendChild(crearColumna(productos, 'backup'));
+    columnas.appendChild(crearColumna(productos, 'subida'));
+    columnas.appendChild(crearColumna(productos, 'bajada'));
+    return columnas;
   }
-  crearSO(productos);
+
+  console.log(columnas);
 }
+//tbody.appendChild(row2)
+
 /*
   const dato2 = document.createElement('td')
   const select2 = document.createElement('select');
@@ -242,8 +276,21 @@ function addRow(productos) {
   dato11.appendChild(btn);
   row2.appendChild(dato11);
 
-  //Aqui se agrega la fila al tbody 
+
+
+
+
+
+
+  //Aqui se agrega la fila al tbody
   tbody.appendChild(row2);
-  tbody.className = `vm${trLength}`;
+  var newTr = trLength;
+  //Este while se asegura de no asignarle la misma clase a 2 filas distintas
+  while (document.querySelector(`.vm${newTr}`) != null) {
+    newTr++;
+  }
+  tbody.className = `vm${newTr}`;
   table.appendChild(tbody);
+}
+
 }*/
