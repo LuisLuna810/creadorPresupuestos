@@ -9,9 +9,6 @@ app.listen(5500, () => {
     console.log('server running in port 5500');
 })
 
-//
-
-
 //configuracion de EJS
 app.set('views', "./views");
 app.set('view engine', 'ejs')

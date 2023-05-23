@@ -1,9 +1,19 @@
-// Funcion que permite eliminar una fila 
+// Funcion que permite eliminar una Virtual machine 
 function del(trNum) {
   const table = document.getElementById('table1');
-  const tbody = document.querySelector(`.vm${trNum}`);
-  table.removeChild(tbody);
-  order(table)
+  if (confirm("¿Estás seguro de que deseas eliminar esta Virtual Machine?")) {
+    const tbody = document.querySelector(`.vm${trNum}`);
+    table.removeChild(tbody);
+    order(table)
+  }
+}
+
+//Funcion que se encarga de realizar la cuenta de tables dentro del div 
+function count() {
+  const table = document.getElementById('table1')
+  tr = table.querySelectorAll('tr')
+  trLength = tr.length
+  return trLength
 }
 
 // Funcion que reordena la numeración de las VM
@@ -18,23 +28,55 @@ function order(table) {
   }
 }
 
-function generarSelect(array, select1){
+//funcion que genera el select con los datos
+function generarSelect(array) {
   var select1 = document.createElement('select');
   select1.setAttribute('class', 'form-select');
-  array.forEach(element => {
+  nombres = obtenerNombre(array);
+  nombres.forEach(element => {
     let option = document.createElement('option');
-    option.textContent = JSON.stringify(obtenerNombre(element));
-    option.value = JSON.stringify(element);
+    option.textContent = element;
+    option.value = element;
     select1.appendChild(option);
-  });
+
+  })
   return select1;
 }
 
+//funcion que filtra el array por categoria
+function filtrarPorCategoria(array, categoria) {
+  return array.filter(elemento => elemento.category === categoria);
+}
+
+//funcion que obtiene un array con los nombres
+function obtenerNombre(array) {
+  let nombres = array.map(elemento => elemento.product);
+  return nombres;
+}
+
+//funcion que crea una columna de la fila
+function crearColumna(productos, nombreCategoria) {
+  const categoria = filtrarPorCategoria(productos, nombreCategoria);
+  const dato2 = document.createElement('td')
+  const selectSO = generarSelect(categoria);
+  dato2.appendChild(selectSO)
+  row2.appendChild(dato2)
+  return row2;
+}
+
+//Funcion que asigna clases a las filas
+function asignarClaseFila() {
+  var newTr = count();
+  //Este while se asegura de no asignarle la misma clase a 2 filas distintas
+  while (document.querySelector(`.vm${newTr}`) != null) {
+    newTr++;
+  }
+  let clase = `vm${newTr}`;
+  return clase;
+}
 
 function addRow(productos) {
-
   console.log(productos);
-  /*
 
   const table = document.getElementById('table1')
   trLength = count()
@@ -50,17 +92,28 @@ function addRow(productos) {
   dato1.textContent = `VM ${trLength}`
   row2.appendChild(dato1)
 
+  const columnas = crearColumnas(productos);
 
+  function crearColumnas(productos) {
+    let columnas = document.createElement('tr');
 
-  //fila sistema operativo
-  function crearSO() {
-      const dato2 = document.createElement('td')
-      const selectSO = generarSelect(productos);
-      dato2.appendChild(selectSO)
-      row2.appendChild(dato2)
+    tbody.className = asignarClaseFila();
+    columnas.appendChild(crearColumna(productos, 'Sistema operativo'));
+    columnas.appendChild(crearColumna(productos, 'licencia'));
+    columnas.appendChild(crearColumna(productos, 'numero de cpu'));
+    columnas.appendChild(crearColumna(productos, 'memoria ram'));
+    columnas.appendChild(crearColumna(productos, 'disco rigido'));
+    columnas.appendChild(crearColumna(productos, 'backup'));
+    columnas.appendChild(crearColumna(productos, 'subida'));
+    columnas.appendChild(crearColumna(productos, 'bajada'));
+    return columnas;
   }
-  crearSO();
 
+  console.log(columnas);
+}
+//tbody.appendChild(row2)
+
+/*
   const dato2 = document.createElement('td')
   const select2 = document.createElement('select');
   const option21 = document.createElement('option');
@@ -198,6 +251,19 @@ function addRow(productos) {
   dato10.appendChild(select10)
   row2.appendChild(dato10)
 
+  const dato7 = document.createElement('td');
+  const btn7 = document.createElement('button');
+  const img7 = document.createElement('img');
+  img7.setAttribute('style', 'width:1.5rem; height: 1.5rem;');
+  img7.setAttribute('src', './resources/lapiz.png');
+  img7.setAttribute('alt', 'noteIcon');
+  btn7.className = `btn btn-outline-warning btn-${trLength}`
+  btn7.setAttribute('onclick', `del(${trLength})`)
+  btn7.appendChild(img7);
+  dato7.appendChild(btn7);
+  dato7.className = 'd-flex justify-content-center'
+  row2.appendChild(dato7);
+
   const dato11 = document.createElement('td');
   const btn = document.createElement('button');
   const img = document.createElement('img');
@@ -212,11 +278,19 @@ function addRow(productos) {
 
 
 
-  /*Aqui se agrega la fila al tbody 
+
+
+
+
+  //Aqui se agrega la fila al tbody
   tbody.appendChild(row2);
-  tbody.className = `vm${trLength}`;
-  table.appendChild(tbody);*/
+  var newTr = trLength;
+  //Este while se asegura de no asignarle la misma clase a 2 filas distintas
+  while (document.querySelector(`.vm${newTr}`) != null) {
+    newTr++;
+  }
+  tbody.className = `vm${newTr}`;
+  table.appendChild(tbody);
 }
 
-
-
+}*/
