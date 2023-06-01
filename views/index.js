@@ -1,7 +1,7 @@
 //Funcion de carga de pagina
-function cargaPagina(array){
+function cargaPagina(array) {
   addRow(array);
-  sessionStorage.setItem('productos',JSON.stringify(array));
+  sessionStorage.setItem('productos', JSON.stringify(array));
 }
 
 //Funcion de crear nueva fila con los datos
@@ -80,7 +80,7 @@ function asignarClaseFila() {
   while (document.querySelector(`.vm${newTr}`) != null) {
     newTr++;
   }
-  let clase = 'vm'+newTr;
+  let clase = 'vm' + newTr;
   return clase;
 }
 
@@ -101,7 +101,7 @@ function crearBotonNota() {
   img.setAttribute('src', './resources/lapiz.png');
   img.setAttribute('alt', 'noteIcon');
   boton.className = `btn btn-outline-warning btn-${nFilas}`
-  boton.setAttribute('onclick', `del("${nFilas}")`) 
+  boton.setAttribute('onclick', `del("${nFilas}")`)
   boton.appendChild(img);
   columna.appendChild(boton);
   columna.className = 'd-flex justify-content-center'
@@ -156,3 +156,64 @@ function addRow(productos) {
   tbody.appendChild(columnas);
   table.appendChild(tbody);
 }
+
+// Almacenar datos de los productos que eliga el cliente para luego realizar el CRUD
+function almacenarDatos() {
+  var datos = [];
+
+  tbodyLength = count();
+  for (let i = 1; i < tbodyLength; i++) {
+    var tbody = document.querySelector(`.vm${i}`);
+    var dato = {
+      vm: tbody.querySelector("td:nth-child(1)").textContent,
+      so: tbody.querySelector("td:nth-child(2) select").value,
+      licencia: tbody.querySelector("td:nth-child(3) select").value,
+      cpu: tbody.querySelector("td:nth-child(4) select").value,
+      ram: tbody.querySelector("td:nth-child(5) select").value,
+      dr: tbody.querySelector("td:nth-child(6) select").value,
+      backup: tbody.querySelector("td:nth-child(7) select").value,
+      subida: tbody.querySelector("td:nth-child(8) select").value,
+      bajada: tbody.querySelector("td:nth-child(9) select").value
+    };
+    datos.push(dato);
+
+  }
+  datosJSON = JSON.stringify(datos);
+  console.log(datosJSON.vm);
+  //localStorage.setItem('datosPresupuesto', datosJSON);
+}
+
+
+
+/*------------------------------------------------- Crear notas -------------------------------------------------*/
+
+var notaActual = ''
+
+function crearNotaBtn(notaActual) {
+  modal.style.display = "block";
+  notaActual = textoNota.value;
+}
+
+
+function closeBtn() {
+  modal.style.display = "none";
+};
+
+
+function cancelarBtn() {
+  modal.style.display = "none";
+};
+
+
+function guardarBtn() {
+  const textoNotaNode = document.createTextNode(notaActual);
+  const textoNotaDiv = document.createElement('div');
+  textoNotaDiv.appendChild(textoNotaNode);
+
+  // Cierra el modal
+  modal.style.display = "none";
+
+  notaActual = textoNota.value
+};
+
+/*--------------------------------------------------------------------------------------------------*/
