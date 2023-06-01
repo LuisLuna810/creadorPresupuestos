@@ -15,7 +15,6 @@ function del(clase) {
   const table = document.getElementById('table1');
   if (confirm("¿Estás seguro de que deseas eliminar esta Virtual Machine?")) {
     const tbody = table.querySelector(clase);
-    const tbody = table.querySelector(clase);
     table.removeChild(tbody);
     order(table)
   }
