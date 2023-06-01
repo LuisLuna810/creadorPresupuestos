@@ -15,6 +15,7 @@ function del(clase) {
   const table = document.getElementById('table1');
   if (confirm("¿Estás seguro de que deseas eliminar esta Virtual Machine?")) {
     const tbody = table.querySelector(clase);
+    const tbody = table.querySelector(clase);
     table.removeChild(tbody);
     order(table)
   }
@@ -36,6 +37,7 @@ function order(table) {
     var getElementTr = getElementsTbody.querySelectorAll(`tr`)[0];
     var getElementTd = getElementTr.querySelectorAll(`td`)[0];
     getElementTd.textContent = `VM ${i}`;
+    getElementTd.textContent = `VM ${i}`;
   }
 }
 
@@ -50,6 +52,7 @@ function generarSelect(array) {
     option.value = element;
     select1.appendChild(option);
   })
+  
   return select1;
 }
 
@@ -92,27 +95,12 @@ function identificarFila() {
   return columna;
 }
 
-//Funcion que crea en la columna un boton de añadir nota
-function crearBotonNota() {
-  const columna = document.createElement('td');
-  const boton = document.createElement('button');
-  const img = document.createElement('img');
-  img.setAttribute('style', 'width:1.5rem; height: 1.5rem;');
-  img.setAttribute('src', './resources/lapiz.png');
-  img.setAttribute('alt', 'noteIcon');
-  boton.className = `btn btn-outline-warning btn-${nFilas}`
-  boton.setAttribute('onclick', `del("${nFilas}")`)
-  boton.appendChild(img);
-  columna.appendChild(boton);
-  columna.className = 'd-flex justify-content-center'
-  return columna
-}
-
 //Funcion que crea en la columna un boton de borrar fila
 function crearBotonBorrar() {
   const columna = document.createElement('td');
   const boton = document.createElement('button');
   const img = document.createElement('img');
+  columna.className = 'text-center';
   img.setAttribute('style', 'width:1.4rem; height: 1.4rem;');
   img.setAttribute('src', './resources/bote-de-basura.png');
   img.setAttribute('alt', 'deleteIcon');
@@ -137,7 +125,6 @@ function crearColumnas(array) {
   columna.appendChild(crearColumna(array, 'backup'));
   columna.appendChild(crearColumna(array, 'subida'));
   columna.appendChild(crearColumna(array, 'bajada'));
-  columna.appendChild(crearBotonNota());
   columna.appendChild(crearBotonBorrar());
   return columna;
 }
@@ -149,6 +136,7 @@ function addRow(productos) {
   nFilas = count()
 
   // Crea una fila y agrega tr con nombre de los campos
+  const row2 = document.createElement('tr')
   const tbody = document.createElement('tbody')
   tbody.className = asignarClaseFila();
   const columnas = crearColumnas(productos);
