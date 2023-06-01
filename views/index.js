@@ -50,6 +50,7 @@ function generarSelect(array) {
     option.value = element;
     select1.appendChild(option);
   })
+  
   return select1;
 }
 
@@ -80,7 +81,7 @@ function asignarClaseFila() {
   while (document.querySelector(`.vm${newTr}`) != null) {
     newTr++;
   }
-  let clase = 'vm' + newTr;
+  let clase = `vm${newTr}` ;
   return clase;
 }
 
@@ -92,27 +93,12 @@ function identificarFila() {
   return columna;
 }
 
-//Funcion que crea en la columna un boton de añadir nota
-function crearBotonNota() {
-  const columna = document.createElement('td');
-  const boton = document.createElement('button');
-  const img = document.createElement('img');
-  img.setAttribute('style', 'width:1.5rem; height: 1.5rem;');
-  img.setAttribute('src', './resources/lapiz.png');
-  img.setAttribute('alt', 'noteIcon');
-  boton.className = `btn btn-outline-warning btn-${nFilas}`
-  boton.setAttribute('onclick', `del("${nFilas}")`) //--------------> asi no va, le toca a payo arreglar esta mieeerrrrrda (Tremenda poronga hizo) (8===D)
-  boton.appendChild(img);
-  columna.appendChild(boton);
-  columna.className = 'd-flex justify-content-center'
-  return columna
-}
-
 //Funcion que crea en la columna un boton de borrar fila
 function crearBotonBorrar() {
   const columna = document.createElement('td');
   const boton = document.createElement('button');
   const img = document.createElement('img');
+  columna.className = 'text-center';
   img.setAttribute('style', 'width:1.4rem; height: 1.4rem;');
   img.setAttribute('src', './resources/bote-de-basura.png');
   img.setAttribute('alt', 'deleteIcon');
@@ -137,7 +123,6 @@ function crearColumnas(array) {
   columna.appendChild(crearColumna(array, 'backup'));
   columna.appendChild(crearColumna(array, 'subida'));
   columna.appendChild(crearColumna(array, 'bajada'));
-  columna.appendChild(crearBotonNota());
   columna.appendChild(crearBotonBorrar());
   return columna;
 }
@@ -157,7 +142,7 @@ function addRow(productos) {
   table.appendChild(tbody);
 }
 
-
+// Almacenar datos de los productos que eliga el cliente para luego realizar el CRUD
 function almacenarDatos() {
     var datos = [];
     
@@ -182,3 +167,38 @@ function almacenarDatos() {
   console.log(datosJSON.vm);
   //localStorage.setItem('datosPresupuesto', datosJSON);
 }
+
+
+
+/*------------------------------------------------- Crear notas -------------------------------------------------*/
+
+var notaActual = ''
+
+function crearNotaBtn(notaActual) {
+  modal.style.display = "block";
+  notaActual = textoNota.value;
+}
+
+
+function closeBtn() {
+  modal.style.display = "none";
+};
+
+
+function cancelarBtn() {
+  modal.style.display = "none";
+};
+
+
+function guardarBtn() {
+  const textoNotaNode = document.createTextNode(notaActual);
+  const textoNotaDiv = document.createElement('div');
+  textoNotaDiv.appendChild(textoNotaNode);
+
+  // Cierra el modal
+  modal.style.display = "none";
+
+  notaActual = textoNota.value
+};
+
+/*--------------------------------------------------------------------------------------------------*/
