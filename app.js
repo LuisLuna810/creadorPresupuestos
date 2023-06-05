@@ -1,5 +1,5 @@
 import express from "express";
-import { productos } from "./funciones.js";
+import { productos, categorias } from "./funciones.js";
 
 
 //cra una express app
@@ -20,6 +20,6 @@ app.use(express.static('resources'));
 app.get("/", (req, res) => {
     res.render('index', {
         productos,
+        categorias,
     })
 })
-

@@ -1,7 +1,8 @@
 //Funcion de carga de pagina
-function cargaPagina(array) {
-  addRow(array);
-  sessionStorage.setItem('productos', JSON.stringify(array));
+function cargaPagina(productos, categorias) {
+  sessionStorage.setItem('productos', JSON.stringify(productos));
+  sessionStorage.setItem('categorias', JSON.stringify(categorias));
+  addRow();
 }
 
 //Funcion de crear nueva fila con los datos
@@ -36,7 +37,7 @@ function order(table) {
     var getElementTr = getElementsTbody.querySelectorAll(`tr`)[0];
     var getElementTd = getElementTr.querySelectorAll(`td`)[0];
     getElementTd.textContent = `VM ${i}`;
-    getElementTd.textContent = `VM ${i}`;
+    getElementTd.value = `VM ${i}`;
   }
 }
 
@@ -62,7 +63,7 @@ function filtrarPorCategoria(array, categoria) {
 
 //funcion que obtiene un array con los nombres
 function obtenerNombre(array) {
-  let nombres = array.map(elemento => elemento.product);
+  let nombres = array.map(elemento => elemento.nombre);
   return nombres;
 }
 
@@ -91,6 +92,7 @@ function identificarFila() {
   const columna = document.createElement('td');
   columna.className = `td${nFilas} m-3 text-center`;
   columna.textContent = `VM ${nFilas}`;
+  columna.value = `VM ${nFilas}`;
   return columna;
 }
 
@@ -113,29 +115,28 @@ function crearBotonBorrar() {
 
 //Funcion que crea las columnas de la tabla
 function crearColumnas(array) {
-  let columna = document.createElement('tr');
+  const categorias = obtenerNombre(JSON.parse(sessionStorage.getItem('categorias')));
 
+  let columna = document.createElement('tr');
+  columna.setAttribute('class', 'virtual');
   columna.appendChild(identificarFila());
-  columna.appendChild(crearColumna(array, 'Sistema operativo'));
-  columna.appendChild(crearColumna(array, 'licencia'));
-  columna.appendChild(crearColumna(array, 'numero de cpu'));
-  columna.appendChild(crearColumna(array, 'memoria ram'));
-  columna.appendChild(crearColumna(array, 'disco rigido'));
-  columna.appendChild(crearColumna(array, 'backup'));
-  columna.appendChild(crearColumna(array, 'subida'));
-  columna.appendChild(crearColumna(array, 'bajada'));
+  categorias.forEach(e => {
+    columna.appendChild(crearColumna(array, e));
+  })
   columna.appendChild(crearBotonBorrar());
   return columna;
 }
 
 //Funcion que añade una fila
-function addRow(productos) {
+function addRow() {
+  //toma los datos almacenados 
+  const productos = JSON.parse(sessionStorage.getItem('productos'));
+
   //Tomar tabla del Dom y numero de filas
   const table = document.getElementById('table1')
   nFilas = count()
 
   // Crea una fila y agrega tr con nombre de los campos
-  const row2 = document.createElement('tr')
   const tbody = document.createElement('tbody')
   tbody.className = asignarClaseFila();
   const columnas = crearColumnas(productos);
@@ -147,27 +148,26 @@ function addRow(productos) {
 // Almacenar datos de los productos que eliga el cliente para luego realizar el CRUD
 function almacenarDatos() {
   var datos = [];
-
-  tbodyLength = count();
-  for (let i = 1; i < tbodyLength; i++) {
-    var tbody = document.querySelector(`.vm${i}`);
+  var tbody = document.querySelectorAll('.virtual');
+  console.log(tbody);
+  tbody.forEach(tr => {
     var dato = {
-      vm: tbody.querySelector("td:nth-child(1)").textContent,
-      so: tbody.querySelector("td:nth-child(2) select").value,
-      licencia: tbody.querySelector("td:nth-child(3) select").value,
-      cpu: tbody.querySelector("td:nth-child(4) select").value,
-      ram: tbody.querySelector("td:nth-child(5) select").value,
-      dr: tbody.querySelector("td:nth-child(6) select").value,
-      backup: tbody.querySelector("td:nth-child(7) select").value,
-      subida: tbody.querySelector("td:nth-child(8) select").value,
-      bajada: tbody.querySelector("td:nth-child(9) select").value
+      vm: tr.querySelector("td:nth-child(1)").value,
+      so: tr.querySelector("td:nth-child(2) select").value,
+      licencia: tr.querySelector("td:nth-child(3) select").value,
+      cpu: tr.querySelector("td:nth-child(4) select").value,
+      ram: tr.querySelector("td:nth-child(5) select").value,
+      dr: tr.querySelector("td:nth-child(6) select").value,
+      backup: tr.querySelector("td:nth-child(7) select").value,
+      subida: tr.querySelector("td:nth-child(8) select").value,
+      bajada: tr.querySelector("td:nth-child(9) select").value
     };
     datos.push(dato);
 
-  }
+  }) 
   datosJSON = JSON.stringify(datos);
-  console.log(datosJSON.vm);
-  //localStorage.setItem('datosPresupuesto', datosJSON);
+  console.log(datosJSON);
+  localStorage.setItem('datosPresupuesto', datosJSON);
 }
 
 
