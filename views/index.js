@@ -148,22 +148,17 @@ function addRow() {
 // Almacenar datos de los productos que eliga el cliente para luego realizar el CRUD
 function almacenarDatos() {
   var datos = [];
+  datos.push([notaActual]);
   var tbody = document.querySelectorAll('.virtual');
-  console.log(tbody);
   tbody.forEach(tr => {
-    var dato = {
-      vm: tr.querySelector("td:nth-child(1)").value,
-      so: tr.querySelector("td:nth-child(2) select").value,
-      licencia: tr.querySelector("td:nth-child(3) select").value,
-      cpu: tr.querySelector("td:nth-child(4) select").value,
-      ram: tr.querySelector("td:nth-child(5) select").value,
-      dr: tr.querySelector("td:nth-child(6) select").value,
-      backup: tr.querySelector("td:nth-child(7) select").value,
-      subida: tr.querySelector("td:nth-child(8) select").value,
-      bajada: tr.querySelector("td:nth-child(9) select").value
-    };
+    let dato = [];
+    dato.push(tr.querySelector('td').value)
+    let valores = tr.querySelectorAll('td select');
+    valores.forEach(td=>{
+      let valor = td.value;
+      dato.push(valor)
+    })
     datos.push(dato);
-
   }) 
   datosJSON = JSON.stringify(datos);
   console.log(datosJSON);
@@ -174,7 +169,7 @@ function almacenarDatos() {
 
 /*------------------------------------------------- Crear notas -------------------------------------------------*/
 
-var notaActual = ''
+var notaActual = 'Sin nota';
 
 function crearNotaBtn(notaActual) {
   modal.style.display = "block";
